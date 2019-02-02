@@ -24,3 +24,4 @@ void GameState::update(const float &dt)
 void GameState::render(sf::RenderTarget *target)
 {
 }
+
