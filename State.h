@@ -18,16 +18,22 @@
 class State
 {
 private:
-	sf::RenderWindow *window;
+	sf::RenderWindow* window;
 	std::vector<sf::Texture> textures;
+
+	bool quitRequest;
 
 public:
 	State(sf::RenderWindow* window);
 	virtual ~State();
 
-	virtual void endState() = 0;
+	const bool &getQuit() const;
 
-	virtual void update(const float &dt) = 0;
-	virtual void render(sf::RenderTarget *target = nullptr) = 0; // If we want to specifically render to something, otherwise keep it a null
+	virtual void checkForQuit();
+
+	virtual void endState() = 0;
+	virtual void updateKeybinds(const float& dt) = 0;
+	virtual void update(const float& dt) = 0;
+	virtual void render(sf::RenderTarget* target = nullptr) = 0; // If we want to specifically render to something, otherwise keep it a null
 };
 

@@ -43,11 +43,17 @@ Game::~Game()
 {
 	delete this->window;
 
-	while (this->states.empty())
+	while (!this->states.empty())
 	{
 		delete this->states.top();
 		this->states.pop();
 	}
+}
+
+// Functions
+void Game::endApplication()
+{
+	std::cout << "Exiting program..." << std::endl;
 }
 
 void Game::updateDt()
@@ -56,7 +62,6 @@ void Game::updateDt()
 	this->dt = this->dtClock.restart().asSeconds();
 }
 
-// Functions
 void Game::updateSFMLEvents()
 {
 	while (this->window->pollEvent(this->sfEvent))
@@ -74,7 +79,21 @@ void Game::update()
 	if (!this->states.empty())
 	{
 		this->states.top()->update(this->dt);
+		if (this->states.top()->getQuit())
+		{
+			// Do stuff, like save character 
+			this->states.top()->endState();
+			delete this->states.top();
+			this->states.pop();
+		}
 	}
+	// End of game
+	else
+	{
+		this->window->close();
+		this->endApplication();
+	}
+
 }
 
 void Game::render()

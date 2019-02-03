@@ -1,2 +1,4 @@
-﻿  GameState.cpp
+﻿  Game.cpp
+  Main.cpp
+  Generating Code...
   Ferox.vcxproj -> C:\Dev\SFML\Ferox\Debug\Ferox.exe
